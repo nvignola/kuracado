@@ -9,7 +9,7 @@ require("dotenv-safe").config({
 const cfg = {};
 
 // HTTP Port to run our web application
-cfg.port = process.env.PORT || 3000;
+cfg.port = process.env.PORT || 1337;
 cfg.twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;
 cfg.twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
 cfg.patientPhoneNumber = process.env.PATIENT_PHONE_NUMBER;
