@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client:dev": "parcel ./client/index.html"
   },
   "repository": {
     "type": "git",
@@ -19,11 +19,17 @@
   "homepage": "https://github.com/nvignola/kuracado#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "express-handlebars": "^4.0.3",
-    "twilio": "^3.42.2"
+    "morgan": "^1.10.0",
+    "twilio": "^3.42.2",
+    "vue": "^2.6.11",
+    "vue-hot-reload-api": "^2.3.4"
   },
   "devDependencies": {
+    "@vue/component-compiler-utils": "^3.1.2",
     "dotenv-safe": "^8.2.0",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.8.3",
+    "vue-template-compiler": "^2.6.11"
   }
 }
