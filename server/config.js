@@ -1,10 +1,5 @@
 const path = require("path");
-require("dotenv-safe").config({
-  path:
-    process.env.NODE_ENV === "test"
-      ? path.resolve(__dirname, "../.env.example")
-      : undefined,
-});
+require("dotenv-safe").config();
 
 const cfg = {};
 
