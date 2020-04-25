@@ -77,15 +77,17 @@ function getBody() {
       </td>
     </tr>
 
+    {{#each medications}}
     <tr class="item">
       <td>
-        Pharma XYZ 5mg
+        {{ this.name }}
       </td>
 
       <td>
-        1
+        {{ this.amount }}
       </td>
     </tr>
+    {{/each}}
   </table>
 </div>
 `;

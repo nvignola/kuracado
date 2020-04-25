@@ -26,6 +26,7 @@
           id="inline-form-input-username"
           placeholder="Medicine"
           list="input-list"
+          v-model="medicine"
         ></b-input>
         <b-form-datalist
           id="input-list"
@@ -41,7 +42,12 @@
         class="mb-2 mr-sm-2 mb-sm-0"
       ></b-form-spinbutton>
 
-      <b-button variant="primary">Send</b-button>
+      <b-button
+        @click="sendReceipt()"
+        :disabled="!this.insuranceId"
+        variant="primary"
+        >Send</b-button
+      >
     </b-form>
   </div>
 </template>
@@ -52,6 +58,7 @@ export default {
   props: ["formData"],
   data() {
     return {
+      medicine: "",
       amount: 1,
       commonPrescriptions: [
         "XYZ 1mg",
@@ -68,6 +75,29 @@ export default {
     },
     insuranceId() {
       return this.formData?.insuranceId;
+    },
+  },
+  methods: {
+    sendReceipt() {
+      /*
+        TODO: As a doctor sometime I have to prescribe multiple medicines
+      */
+      fetch("http://localhost:1337/send-message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          patientFullname: this.name,
+          patientInsuranceID: this.insuranceId,
+          medications: [
+            {
+              name: this.medicine,
+              amount: this.amount,
+            },
+          ],
+        }),
+      });
     },
   },
 };

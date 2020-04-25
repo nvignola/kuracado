@@ -16,7 +16,16 @@ router.get("/all-messages", (req, res, next) => {
 
 // POST: /send-message
 router.post("/send-message", async (req, res, next) => {
+  const params = {
+    patientFullname: req.body.patientFullname,
+    patientInsuranceID: req.body.patientInsuranceID,
+    medications: req.body.medications,
+  };
+
+  await createReceipt(params);
+
   const { to, body } = req.body;
+
   try {
     const { sid } = await sendMessage(to, body);
     res.send({
