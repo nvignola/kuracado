@@ -1,7 +1,12 @@
 <template>
-  <b-table hover :items="patients" :fields="fields">
+  <b-table
+    hover
+    :items="patients"
+    :fields="fields"
+    @row-clicked="(record) => $emit('patientSelected', record)"
+  >
     <template v-slot:cell(phoneNumber)="data">
-      <h1>{{ data.value }}</h1>
+      {{ data.value }}
     </template>
     <!-- A virtual composite column -->
     <template v-slot:cell(messages)="data">
@@ -13,12 +18,6 @@
           {{ mess.text }}
         </li>
       </ul>
-    </template>
-    <template v-slot:cell(reply)="data">
-      <h5>{{ data.item.name }}</h5>
-      <b-button @click="replyTo(data.item.phoneNumber)"
-        ><b-icon-reply
-      /></b-button>
     </template>
   </b-table>
 </template>
@@ -32,27 +31,15 @@ export default Vue.extend({
       fields: [
         // A virtual column that doesn't exist in items
         "phoneNumber",
+        "name",
+        "insuranceId",
         // A column that needs custom formatting
         "messages",
-        { key: "reply", label: "Reply", colType: "button" },
       ],
       patients: [],
     };
   },
-  methods: {
-    replyTo(phoneNumber) {
-      fetch("http://localhost:1337/send-message", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          to: phoneNumber,
-          body: "You receitp has been sent to pharmacy X",
-        }),
-      });
-    },
-  },
+  methods: {},
   mounted() {
     fetch(`http://localhost:1337/all-messages`)
       .then((response) => response.json())

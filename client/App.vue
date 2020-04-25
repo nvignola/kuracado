@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <h1>{{ title }}</h1>
-    <patients-table></patients-table>
-    <receipt-form></receipt-form>
+    <patients-table @patientSelected="updateFormData"></patients-table>
+    <receipt-form :formData="formData"></receipt-form>
   </div>
 </template>
 
@@ -20,7 +20,13 @@ export default Vue.extend({
   data() {
     return {
       title: "Kuracado 💊",
+      formData: null,
     };
+  },
+  methods: {
+    updateFormData(record) {
+      this.formData = record;
+    },
   },
 });
 </script>

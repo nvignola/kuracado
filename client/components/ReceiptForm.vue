@@ -3,12 +3,25 @@
     <h2>Receipt:</h2>
     <b-form inline>
       <label class="sr-only" for="inline-form-input-name">Name</label>
-      <b-input id="inline-form-input-name" class="mb-2 mr-sm-2 mb-sm-0" placeholder="Jane Doe"></b-input>
+      <b-input
+        id="inline-form-input-name"
+        class="mb-2 mr-sm-2 mb-sm-0"
+        placeholder="Select a patient from the list..."
+        disabled=""
+        :value="name"
+      ></b-input>
 
       <label class="sr-only" for="inline-form-input-username">Username</label>
       <b-input-group prepend="💊" class="mb-2 mr-sm-2 mb-sm-0">
-        <b-input id="inline-form-input-username" placeholder="Medicine" list="input-list"></b-input>
-        <b-form-datalist id="input-list" :options="commonPrescriptions"></b-form-datalist>
+        <b-input
+          id="inline-form-input-username"
+          placeholder="Medicine"
+          list="input-list"
+        ></b-input>
+        <b-form-datalist
+          id="input-list"
+          :options="commonPrescriptions"
+        ></b-form-datalist>
       </b-input-group>
 
       <b-form-spinbutton
@@ -27,6 +40,7 @@
 <script>
 export default {
   name: "ReceiptForm",
+  props: ["formData"],
   data() {
     return {
       amount: 1,
@@ -35,10 +49,18 @@ export default {
         "FOO 5mg",
         "Grape 2.5mg",
         "PharmX 1mg",
-        "PharmX 3mg"
-      ]
+        "PharmX 3mg",
+      ],
     };
-  }
+  },
+  computed: {
+    name() {
+      return this.formData?.name;
+    },
+    insuranceId() {
+      return this.formData?.insuranceId;
+    },
+  },
 };
 </script>
 
