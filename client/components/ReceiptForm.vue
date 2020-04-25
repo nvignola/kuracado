@@ -11,6 +11,15 @@
         :value="name"
       ></b-input>
 
+      <label class="sr-only" for="insuranceId">Insurance ID</label>
+      <b-input
+        id="insuranceId"
+        class="mb-2 mr-sm-2 mb-sm-0"
+        placeholder="Select a patient from the list..."
+        disabled=""
+        :value="insuranceId"
+      ></b-input>
+
       <label class="sr-only" for="inline-form-input-username">Username</label>
       <b-input-group prepend="💊" class="mb-2 mr-sm-2 mb-sm-0">
         <b-input
