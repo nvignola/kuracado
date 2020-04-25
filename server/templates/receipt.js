@@ -11,7 +11,8 @@ module.exports = `
 </html>
 `;
 
-const getBody = () => `
+function getBody() {
+  return `
 <div class="invoice-box">
   <table cellpadding="0" cellspacing="0">
     <tr class="top">
@@ -88,8 +89,10 @@ const getBody = () => `
   </table>
 </div>
 `;
+}
 
-const getStyles = () => `
+function getStyles() {
+  return `
   <style>
     .invoice-box {
         max-width: 800px;
@@ -184,3 +187,4 @@ const getStyles = () => `
     }
     </style>
 `;
+}
