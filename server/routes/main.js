@@ -1,15 +1,15 @@
 "use strict";
 
 const express = require("express");
-const twilio = require("twilio");
-const cfg = require("../config");
+const sendMessage = require("../utils/sendMessage");
+const createReceipt = require("../utils/createReceipt");
+const faker = require("faker");
 
-const client = twilio(cfg.twilioAccountSid, cfg.twilioAuthToken);
 const router = express.Router();
 
 const messages = {};
 
-// GET: /dashboard
+// GET: /all-messages
 router.get("/all-messages", (req, res, next) => {
   res.send({ data: messagesMock });
 });
@@ -18,11 +18,7 @@ router.get("/all-messages", (req, res, next) => {
 router.post("/send-message", async (req, res, next) => {
   const { to, body } = req.body;
   try {
-    const { sid } = await client.messages.create({
-      from: `whatsapp:${cfg.twilioPhoneNumber}`,
-      body,
-      to: `whatsapp:${cfg.patientPhoneNumber}`,
-    });
+    const { sid } = await sendMessage(to, body);
     res.send({
       status: "success",
       message: `Message sent to ${to}. Message SID: ${sid}`,
@@ -36,6 +32,7 @@ router.post("/send-message", async (req, res, next) => {
   }
 });
 
+// POST: /receive-message
 router.post("/receive-message", ({ body }, res) => {
   const {
     From: from,
@@ -61,7 +58,13 @@ router.post("/receive-message", ({ body }, res) => {
     messages[phoneNumber].messages.push(message);
     messages[phoneNumber] = { ...messages[phoneNumber], ...geoData };
   } else {
-    messages[phoneNumber] = { messages: [message], ...geoData };
+    const extra = {
+      name: faker.name.findName(),
+      insuranceId: faker.internet.password(),
+    };
+
+    messages[phoneNumber] = { messages: [message], ...geoData, ...extra };
   }
 });
+
 module.exports = router;
