@@ -37,4 +37,20 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped></style>
+<style>
+:root {
+  --accent: #0099f5;
+}
+
+.section {
+  margin-top: 3em;
+}
+
+.title {
+  margin-bottom: 1em;
+}
+
+.title_accent {
+  color: var(--accent);
+}
+</style>

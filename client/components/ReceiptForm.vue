@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>Receipt:</h2>
+  <div class="section">
+    <h4 class="title title_accent">Receipt composer</h4>
     <b-form @submit.prevent="sendReceipt()">
       <b-form-row>
         <b-col>
