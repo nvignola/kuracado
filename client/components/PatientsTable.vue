@@ -16,7 +16,7 @@
             <span class="text-mute">{{
               new Date(mess.receivedAt).toLocaleTimeString()
             }}</span>
-            {{ mess.text }}
+            {{ mess.textMessage }}
           </li>
         </ul>
       </template>
