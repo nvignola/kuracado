@@ -3,9 +3,10 @@ const receiptTemplate = require("../templates/receipt");
 
 module.exports = (receiptData) => {
   const { patientFullname, patientInsuranceID, medications } = receiptData;
+  const fileName = `receipt_${patientInsuranceID}.png`;
 
   return nodeHtmlToImage({
-    output: `public/receipt_${patientInsuranceID}.png`,
+    output: `public/${fileName}`,
     html: receiptTemplate,
     content: {
       createdAt: new Date().toLocaleDateString(),
@@ -14,5 +15,5 @@ module.exports = (receiptData) => {
       patientInsuranceID,
       medications,
     },
-  });
+  }).then(() => fileName);
 };
