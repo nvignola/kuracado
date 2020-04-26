@@ -60,6 +60,8 @@ function getBody() {
     <tr class="details">
       <td>
         {{ patientFullname }}
+        <br>
+        <address>{{ address }}</address>
       </td>
 
       <td>
