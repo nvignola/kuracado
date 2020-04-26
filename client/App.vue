@@ -2,7 +2,10 @@
   <div class="container">
     <h1>{{ title }}</h1>
     <patients-table @patientSelected="updateFormData"></patients-table>
-    <receipt-form :formData="formData"></receipt-form>
+    <receipt-form
+      :formData="formData"
+      @receiptSent="resetData()"
+    ></receipt-form>
   </div>
 </template>
 
@@ -26,6 +29,9 @@ export default Vue.extend({
   methods: {
     updateFormData(record) {
       this.formData = record;
+    },
+    resetData() {
+      this.formData = null;
     },
   },
 });
