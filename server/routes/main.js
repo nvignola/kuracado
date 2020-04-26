@@ -4,14 +4,14 @@ const express = require("express");
 const sendMessage = require("../utils/sendMessage");
 const createReceipt = require("../utils/createReceipt");
 const faker = require("faker");
-
+const cfg = require("../config");
 const router = express.Router();
 
 const messages = {};
 
 // GET: /all-messages
 router.get("/all-messages", (req, res, next) => {
-  res.send({ data: messagesMock });
+  res.send({ data: messages });
 });
 
 // POST: /send-message
@@ -22,12 +22,14 @@ router.post("/send-message", async (req, res, next) => {
     medications: req.body.medications,
   };
 
-  await createReceipt(params);
-
+  const fileName = await createReceipt(params);
   const { to, body } = req.body;
+  const receiptUrl = `${cfg.serverUrl}/${fileName}`;
+
+  messages[fromWeb].receiptLink = receiptUrl;
 
   try {
-    const { sid } = await sendMessage(to, body);
+    const { sid } = await sendMessage(to, body, receiptUrl);
     res.send({
       status: "success",
       message: `Message sent to ${to}. Message SID: ${sid}`,
