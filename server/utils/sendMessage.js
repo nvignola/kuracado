@@ -7,6 +7,6 @@ module.exports = (to, body, mediaUrl) =>
   client.messages.create({
     from: `whatsapp:${cfg.twilioPhoneNumber}`,
     body,
-    to,
+    to: `whatsapp:${to}`,
     ...(mediaUrl && { mediaUrl }),
   });
