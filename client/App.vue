@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>{{ title }}</h1>
+    <h1 class="brand">{{ title }}</h1>
     <patients-table @patientSelected="updateFormData"></patients-table>
     <receipt-form
       :formData="formData"
@@ -22,7 +22,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      title: "Kuracado 💊",
+      title: "Kuracado",
       formData: null,
     };
   },
@@ -40,10 +40,21 @@ export default Vue.extend({
 <style>
 :root {
   --accent: #0099f5;
+  --brand: #ffdcdf;
+}
+
+.brand {
+  background-color: var(--brand);
+  color: #5d4b71;
+  display: inline-block;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1em;
 }
 
 .section {
   margin-top: 3em;
+  padding: 0.5em;
 }
 
 .title {

@@ -194,8 +194,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .send-btn {
   margin: 1em 0;
+}
+
+.section {
+  background-color: #f5f5f5;
 }
 </style>
