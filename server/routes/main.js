@@ -28,7 +28,8 @@ router.post("/send-message", async (req, res, next) => {
 
   const fileName = await createReceipt(params);
   const receiptUrl = `${cfg.serverUrl}/${fileName}`;
-  const pharmacyText = `Please, once the medicine are shipped send the tracking number.`;
+  const pharmacyText =
+    "Please, once the medicine are shipped send the tracking number.";
 
   patient.receiptLink = receiptUrl;
 
