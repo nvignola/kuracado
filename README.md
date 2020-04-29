@@ -89,7 +89,7 @@ npm install
 npm run setup
 ```
 
-See [Twilio Account Settings](#kuracado-settings) to locate the necessary environment variables.
+See [Kuracado Settings](#kuracado-settings) to locate the necessary environment variables.
 
 1. Run the application
 
