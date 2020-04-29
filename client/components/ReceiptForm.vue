@@ -48,6 +48,7 @@
               required
               disabled=""
               :value="phoneNumber"
+              class="text-blurry"
             ></b-form-input>
           </b-form-group>
         </b-col>

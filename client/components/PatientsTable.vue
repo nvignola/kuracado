@@ -41,8 +41,16 @@
       </p>
     </div>
     <!-- Temporary dev commands -->
-    <button @click="startPoll">start poll</button>
-    <button @click="stopPoll">stop poll</button>
+    <h6>{{ "< For Dev />" }}</h6>
+    <b-button
+      size="sm"
+      @click="handlePolling"
+      :variant="this.isPolling ? 'danger' : 'warning'"
+      small
+    >
+      <b-spinner v-if="isPolling" small variant="light"></b-spinner>
+      {{ this.isPolling ? "Stop polling data" : "Start polling data" }}
+    </b-button>
   </div>
 </template>
 
@@ -63,15 +71,20 @@ function cbPoll(data) {
 export default Vue.extend({
   data() {
     return {
+      isPolling: false,
       fields: [
         // A virtual column that doesn't exist in items
-        "phoneNumber",
+        { key: "phoneNumber", tdClass: "text-blurry" },
         "name",
         "insuranceId",
         // A column that needs custom formatting
         "messages",
-        "receiptLink",
-        "isPackageSent",
+        { key: "receiptLink", tdClass: "text-center" },
+        {
+          key: "isPackageSent",
+          label: "Package shipped",
+          tdClass: "text-center",
+        },
       ],
       patients: [],
     };
@@ -82,12 +95,20 @@ export default Vue.extend({
     },
   },
   methods: {
+    handlePolling() {
+      if (this.isPolling) {
+        this.stopPoll();
+      } else {
+        this.startPoll();
+      }
+    },
     stopPoll() {
       Polling.disablePoll();
+      this.isPolling = false;
     },
     startPoll() {
-      // const callbackPolling = cbPoll.bind(this);
       Polling.activatePoll(this.pollingCallback);
+      this.isPolling = true;
     },
   },
   mounted() {
@@ -99,10 +120,11 @@ export default Vue.extend({
           phoneNumber: key,
           ...data[key],
         }));
+      })
+      .then(() => {
+        Polling.activatePoll(this.pollingCallback);
+        this.isPolling = true;
       });
-    // .then(() => {
-    //   Polling.activatePoll(callbackPolling);
-    // });
   },
 });
 </script>

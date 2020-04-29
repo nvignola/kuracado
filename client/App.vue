@@ -64,4 +64,9 @@ export default Vue.extend({
 .title_accent {
   color: var(--accent);
 }
+
+.text-blurry {
+  text-shadow: 0 0 8px black;
+  color: transparent !important;
+}
 </style>
