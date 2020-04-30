@@ -1,6 +1,6 @@
 <img  src="assets/kuracado.png"  alt="Kuracado logo"  width="100%"  />
 
-# Kurakado
+# Kuracado
 
 Helping patients to get their medicine. Project for Dev.to - Twilio hackathon.
 
